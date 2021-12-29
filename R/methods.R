@@ -1,4 +1,4 @@
-
+accessibility <- demand_id. <- demand_vol. <- dist. <- supply_id. <- supply_vol. <- ratio <- NULL
 
 
 #' Calculate Two-Step Floating Catchment Areas (2SFCA)
@@ -17,7 +17,7 @@ tsfca <- function(dist_table, supply_id, demand_id, supply_vol, demand_vol, dist
 
   # create a temp standardized and renamed tibble to work with
   # we'll rename things back to their original names at the end
-  dist_table. <- rename(dist_table,
+  dist_table. <- dplyr::rename(dist_table,
                         supply_id. = {{supply_id}},
                         demand_id. = {{demand_id}},
                         supply_vol. = {{supply_vol}},
@@ -32,8 +32,8 @@ tsfca <- function(dist_table, supply_id, demand_id, supply_vol, demand_vol, dist
   #   distinct()
 
   demand_tb <- dist_table. %>%
-    select(demand_id., demand_vol.) %>%
-    distinct()
+    dplyr::select(demand_id., demand_vol.) %>%
+    dplyr::distinct()
 
   # here we calculate the two-step floating catchment area.
   # first: discard all distance rows that are greater than dist_threshold..
@@ -42,19 +42,19 @@ tsfca <- function(dist_table, supply_id, demand_id, supply_vol, demand_vol, dist
   # then: the full_join brings back any empty demand areas, and we assign them 0 with mutate
   # then: we rename things back to the way they were, and put them in increasing order of demand_id
   dist_table. %>%
-    filter (dist. < dist_threshold) %>%
+    dplyr::filter (dist. < dist_threshold) %>%
     #filter(demand_vol. != 0) %>% ####################### TESTING
-    group_by(supply_id.) %>%
-    mutate(ratio = supply_vol./sum(demand_vol.)) %>%
-    ungroup() %>%
-    group_by(demand_id.) %>%
-    summarise(demand_id., accessibility = sum(ratio), .groups = "drop") %>%
-    distinct() %>%
-    ungroup() %>%
-    full_join(demand_tb, by = "demand_id.") %>%
-    distinct() %>%
-    mutate(accessibility = if_else(is.na(accessibility), 0, accessibility)) %>%
-    select({{demand_id}} := demand_id., {{demand_vol}} := demand_vol., accessibility) %>%
-    arrange({{demand_id}})
+    dplyr::group_by(supply_id.) %>%
+    dplyr::mutate(ratio = supply_vol./sum(demand_vol.)) %>%
+    dplyr::ungroup() %>%
+    dplyr::group_by(demand_id.) %>%
+    dplyr::summarise(demand_id., accessibility = sum(ratio), .groups = "drop") %>%
+    dplyr::distinct() %>%
+    dplyr::ungroup() %>%
+    dplyr::full_join(demand_tb, by = "demand_id.") %>%
+    dplyr::distinct() %>%
+    dplyr::mutate(accessibility = dplyr::if_else(is.na(accessibility), 0, accessibility)) %>%
+    dplyr::select({{demand_id}} := demand_id., {{demand_vol}} := demand_vol., accessibility) %>%
+    dplyr::arrange({{demand_id}})
 
 }
