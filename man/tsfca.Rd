@@ -4,30 +4,22 @@
 \alias{tsfca}
 \title{Calculate Two-Step Floating Catchment Areas (2SFCA)}
 \usage{
-tsfca(
-  dist_table,
-  supply_id,
-  demand_id,
-  supply_vol,
-  demand_vol,
-  dist,
-  dist_threshold
-)
+tsfca(dist_table, supply, demand, dist, dist_threshold, supply_vol, demand_vol)
 }
 \arguments{
 \item{dist_table}{A data frame containing an origin-destination (OD) table, with additional columns for supply and demand volumes.}
 
-\item{supply_id}{The name of the column in `dist_table` that uniquely identifies supply points (hospitals, physicians, etc.).}
+\item{supply}{The name of the column in `dist_table` that uniquely identifies supply points (hospitals, physicians, etc.).}
 
-\item{demand_id}{The name of the column in `dist_table` that uniquely identifies demand points (census tracts, residences, etc.).}
-
-\item{supply_vol}{The name of the column in `dist_table` that contains supply volumes (# of hospital beds, # of physicians, etc.).}
-
-\item{demand_vol}{The name of the column in `dist_table` that contains demand volumes (population counts, etc.).}
+\item{demand}{The name of the column in `dist_table` that uniquely identifies demand points (census tracts, residences, etc.).}
 
 \item{dist}{The name of the column in `dist_table` that contains the distance between the `supply_id` and the `demand_id`.}
 
 \item{dist_threshold}{The distance threshold defining catchment areas.}
+
+\item{supply_vol}{The name of the column in `dist_table` that contains supply volumes (# of hospital beds, # of physicians, etc.).}
+
+\item{demand_vol}{The name of the column in `dist_table` that contains demand volumes (population counts, etc.).}
 }
 \value{
 A data frame.
