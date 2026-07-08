@@ -7,25 +7,31 @@
 tsfca(dist_table, supply, demand, dist, dist_threshold, supply_vol, demand_vol)
 }
 \arguments{
-\item{dist_table}{A data frame containing an origin-destination (OD) table, with additional columns for supply and demand volumes.}
+\item{dist_table}{A data frame containing an origin-destination (OD) table,
+with additional columns for supply and demand volumes.}
 
-\item{supply}{The name of the column in `dist_table` that uniquely identifies supply points (hospitals, physicians, etc.).}
+\item{supply}{The name of the column in `dist_table` that uniquely identifies
+supply points (hospitals, physicians, etc.).}
 
-\item{demand}{The name of the column in `dist_table` that uniquely identifies demand points (census tracts, residences, etc.).}
+\item{demand}{The name of the column in `dist_table` that uniquely identifies
+demand points (census tracts, residences, etc.).}
 
-\item{dist}{The name of the column in `dist_table` that contains the distance between the `supply` and the `demand`.}
+\item{dist}{The name of the column in `dist_table` that contains the distance
+between the `supply` and the `demand`.}
 
 \item{dist_threshold}{The distance threshold defining catchment areas.}
 
-\item{supply_vol}{The name of the column in `dist_table` that contains supply volumes (# of hospital beds, # of physicians, etc.).}
+\item{supply_vol}{The name of the column in `dist_table` that contains supply
+volumes (# of hospital beds, # of physicians, etc.).}
 
-\item{demand_vol}{The name of the column in `dist_table` that contains demand volumes (population counts, etc.).}
+\item{demand_vol}{The name of the column in `dist_table` that contains demand
+volumes (population counts, etc.).}
 }
 \value{
 A data frame.
 }
 \description{
-Calculate the accessibility index using the two-step floating catchment area (2SFCA) method.
+Calculate accessibility with two-step floating catchment areas (2SFCA).
 }
 \details{
 Luo & Wang 2003, DOI:10.1068/b29120
